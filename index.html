@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borang Penilaian — Usrah &amp; Rehlah Mahabbah, Tasik Kenyir 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0b2545;
+    --navy:#13315c;
+    --navy-soft:#1f4068;
+    --gold:#c9a24b;
+    --gold-light:#e8cf8a;
+    --paper:#f6f3ea;
+    --ink:#1c2430;
+    --ink-soft:#5b6472;
+    --line:#dcd4bd;
+    --red:#a6192e;
+    --ok:#1f7a4c;
+    --radius:14px;
+    --shadow: 0 10px 30px -12px rgba(11,37,69,.25);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(201,162,75,.12), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(19,49,92,.10), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    line-height:1.5;
+    padding:0 0 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px;}
+
+  /* ---- Hero ---- */
+  .hero{
+    background:linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-soft) 100%);
+    color:#fff;
+    padding:52px 22px 84px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 88% 18%, rgba(201,162,75,.25) 0%, transparent 42%);
+    pointer-events:none;
+  }
+  .crescent{
+    position:absolute; right:-40px; top:-40px; width:220px; height:220px;
+    border-radius:50%;
+    box-shadow: -70px 20px 0 6px rgba(201,162,75,.16);
+    opacity:.9;
+  }
+  .eyebrow{
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold-light); font-weight:500; margin:0 0 10px;
+  }
+  h1{
+    font-family:'Amiri',serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,38px);
+    margin:0 0 12px;
+    letter-spacing:.01em;
+  }
+  .hero p{
+    margin:0; color:#dfe6f2; max-width:52ch; font-size:15.5px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:22px;
+    font-size:13.5px; color:var(--gold-light);
+  }
+  .hero-meta span{display:flex; align-items:center; gap:7px;}
+  .divider-moon{
+    display:flex; align-items:center; gap:10px; margin:0 auto;
+    max-width:760px; padding:0 18px; transform:translateY(-40px);
+  }
+  .divider-moon .line{flex:1; height:1px; background:var(--line);}
+  .divider-moon .glyph{
+    font-family:'Amiri',serif; color:var(--gold); font-size:20px;
+  }
+
+  /* ---- Card / Section ---- */
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:26px 24px; margin-bottom:20px;
+  }
+  .section-title{
+    font-family:'Amiri',serif; font-weight:700; color:var(--navy-deep);
+    font-size:20px; margin:0 0 4px; display:flex; align-items:baseline; gap:8px;
+  }
+  .section-sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 18px;}
+
+  label{display:block; font-size:13.5px; font-weight:500; color:var(--navy); margin:14px 0 6px;}
+  label .req{color:var(--red);}
+  input[type=text], input[type=tel], select, textarea{
+    width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:9px;
+    font-family:inherit; font-size:14.5px; color:var(--ink); background:#fdfcf8;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,162,75,.22);
+  }
+  textarea{resize:vertical; min-height:78px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 16px;}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr;}}
+
+  /* ---- Rating scale legend ---- */
+  .legend{
+    display:flex; gap:6px; flex-wrap:wrap; margin:16px 0 4px;
+    background:var(--paper); border:1px dashed var(--line); border-radius:10px; padding:12px 14px;
+  }
+  .legend .chip{
+    font-size:12px; color:var(--navy); display:flex; align-items:center; gap:6px;
+  }
+  .legend .num{
+    width:20px; height:20px; border-radius:50%; background:var(--navy-deep); color:var(--gold-light);
+    display:inline-flex; align-items:center; justify-content:center; font-weight:600; font-size:11px;
+  }
+
+  /* ---- Rating item ---- */
+  .criteria{border-top:1px solid var(--line); padding:14px 0;}
+  .criteria:first-of-type{border-top:none;}
+  .criteria p{margin:0 0 10px; font-size:14.5px; color:var(--ink);}
+  .scale{display:flex; gap:8px; flex-wrap:wrap;}
+  .scale input{display:none;}
+  .scale label.opt{
+    margin:0; flex:1; min-width:52px; text-align:center; padding:10px 6px;
+    border:1px solid var(--line); border-radius:9px; cursor:pointer; font-size:13px;
+    color:var(--ink-soft); background:#fdfcf8; user-select:none;
+    transition:all .15s;
+  }
+  .scale label.opt .n{display:block; font-weight:700; font-size:15px; color:var(--navy);}
+  .scale label.opt .t{display:block; font-size:10.5px; margin-top:2px;}
+  .scale input:checked + label.opt{
+    background:var(--navy-deep); border-color:var(--navy-deep); color:#fff;
+  }
+  .scale input:checked + label.opt .n, .scale input:checked + label.opt .t{color:var(--gold-light);}
+
+  .subhead{
+    font-weight:600; color:var(--navy-deep); font-size:14px; margin:20px 0 4px;
+    text-transform:uppercase; letter-spacing:.06em;
+  }
+
+  /* ---- Overall rating (final, larger) ---- */
+  .overall-scale{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+  .overall-scale input{display:none;}
+  .overall-scale label.opt{
+    flex:1; min-width:64px; text-align:center; padding:16px 8px;
+    border:2px solid var(--line); border-radius:12px; cursor:pointer;
+    background:#fdfcf8; transition:all .15s;
+  }
+  .overall-scale label.opt .n{display:block; font-weight:700; font-size:22px; color:var(--navy);}
+  .overall-scale label.opt .t{display:block; font-size:11px; margin-top:3px; color:var(--ink-soft);}
+  .overall-scale input:checked + label.opt{
+    background:linear-gradient(160deg,var(--navy-deep),var(--navy-soft)); border-color:var(--gold);
+  }
+  .overall-scale input:checked + label.opt .n{color:var(--gold-light);}
+  .overall-scale input:checked + label.opt .t{color:#e5ecf6;}
+
+  /* ---- Submit ---- */
+  .submit-row{display:flex; align-items:center; gap:14px; margin-top:8px;}
+  button.submit{
+    background:var(--navy-deep); color:#fff; border:none; padding:14px 30px;
+    font-family:'Jost',sans-serif; font-weight:600; font-size:15px; border-radius:10px;
+    cursor:pointer; letter-spacing:.02em; transition:background .15s, transform .1s;
+    box-shadow:var(--shadow);
+  }
+  button.submit:hover{background:var(--navy);}
+  button.submit:active{transform:translateY(1px);}
+  button.submit:disabled{opacity:.6; cursor:wait;}
+  .status{font-size:13.5px;}
+  .status.ok{color:var(--ok); font-weight:600;}
+  .status.err{color:var(--red); font-weight:600;}
+
+  .footer-note{
+    text-align:center; color:var(--ink-soft); font-size:12px; margin-top:26px; line-height:1.7;
+  }
+  .footer-note b{color:var(--navy);}
+
+  .success-screen{
+    text-align:center; padding:60px 24px;
+  }
+  .success-screen .glyph{font-family:'Amiri',serif; font-size:44px; color:var(--gold); margin-bottom:10px;}
+  .success-screen h2{font-family:'Amiri',serif; color:var(--navy-deep); margin:0 0 8px;}
+  .success-screen p{color:var(--ink-soft); max-width:44ch; margin:0 auto;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="crescent"></div>
+  <div class="wrap">
+    <p class="eyebrow">Unit Syariah &middot; Hospital Pakar PUSRAWI Kuala Lumpur</p>
+    <h1>Borang Penilaian Program<br>Usrah &amp; Rehlah Mahabbah</h1>
+    <p>"Pemerkasaan Rohani, Memupuk Ukhuwah Sejati" — Houseboat, Tasik Kenyir, Terengganu</p>
+    <div class="hero-meta">
+      <span>&#128197; 17 – 20 Julai 2026</span>
+      <span>&#128205; Tasik Kenyir, Terengganu</span>
+      <span>&#127959; Jabatan Undang-Undang &amp; Perkhidmatan Syariah</span>
+    </div>
+  </div>
+</div>
+<div class="divider-moon"><div class="line"></div><span class="glyph">&#9789;</span><div class="line"></div></div>
+
+<div class="wrap" id="formWrap">
+
+  <div class="card">
+    <p class="section-title">Maklumat Peserta</p>
+    <p class="section-sub">Maklumat ini membantu kami menghubungkaitkan penilaian dengan kumpulan/jabatan peserta.</p>
+    <div class="grid2">
+      <div>
+        <label>Nama Penuh <span class="req">*</span></label>
+        <input type="text" id="nama" required placeholder="cth. Ahmad bin Ali">
+      </div>
+      <div>
+        <label>Jabatan / Unit <span class="req">*</span></label>
+        <input type="text" id="jabatan" required placeholder="cth. Wad As-Salam">
+      </div>
+    </div>
+    <div class="grid2">
+      <div>
+        <label>Pilihan Majikan <span class="req">*</span></label>
+        <select id="majikan" required>
+          <option value="" disabled selected>Pilih majikan</option>
+          <option value="Pusrawi Heritage">Pusrawi Heritage</option>
+          <option value="HPPKL">HPPKL</option>
+          <option value="MHC">MHC</option>
+        </select>
+      </div>
+      <div>
+        <label>No. ID Staff <span class="req">*</span></label>
+        <input type="text" id="idStaff" required placeholder="cth. PUS0123">
+      </div>
+    </div>
+    <div class="grid2">
+      <div>
+        <label>No. Kad Pengenalan <span class="req">*</span></label>
+        <input type="text" id="noKp" required placeholder="cth. 900101-14-5566" maxlength="14">
+      </div>
+      <div>
+        <label>No. Telefon (pilihan)</label>
+        <input type="tel" id="telefon" placeholder="01X-XXXXXXX">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="section-title">Skala Penilaian</p>
+    <p class="section-sub">Sila nilai setiap kriteria berikut berdasarkan skala di bawah.</p>
+    <div class="legend">
+      <span class="chip"><span class="num">5</span> Cemerlang</span>
+      <span class="chip"><span class="num">4</span> Baik</span>
+      <span class="chip"><span class="num">3</span> Purata</span>
+      <span class="chip"><span class="num">2</span> Berpuas hati</span>
+      <span class="chip"><span class="num">1</span> Tidak Memuaskan</span>
+    </div>
+
+    <p class="subhead">Fasilitator &amp; Naqib Usrah</p>
+    <div id="group-fasilitator"></div>
+
+    <p class="subhead">Kandungan &amp; Modul Program</p>
+    <div id="group-kandungan"></div>
+
+    <p class="subhead">Pengurusan, Logistik &amp; Tempat</p>
+    <div id="group-logistik"></div>
+  </div>
+
+  <div class="card">
+    <p class="section-title">Penilaian Keseluruhan</p>
+    <p class="section-sub">Secara keseluruhan, bagaimana anda menilai Program Usrah &amp; Rehlah Mahabbah ini?</p>
+    <div class="overall-scale" id="overallScale">
+      <input type="radio" name="keseluruhan" id="k5" value="5"><label class="opt" for="k5"><span class="n">5</span><span class="t">Cemerlang</span></label>
+      <input type="radio" name="keseluruhan" id="k4" value="4"><label class="opt" for="k4"><span class="n">4</span><span class="t">Baik</span></label>
+      <input type="radio" name="keseluruhan" id="k3" value="3"><label class="opt" for="k3"><span class="n">3</span><span class="t">Purata</span></label>
+      <input type="radio" name="keseluruhan" id="k2" value="2"><label class="opt" for="k2"><span class="n">2</span><span class="t">Berpuas hati</span></label>
+      <input type="radio" name="keseluruhan" id="k1" value="1"><label class="opt" for="k1"><span class="n">1</span><span class="t">Tidak Memuaskan</span></label>
+    </div>
+
+    <label>Komen &amp; Cadangan</label>
+    <textarea id="komen" placeholder="Kongsikan pandangan anda tentang program ini secara keseluruhan..."></textarea>
+
+    <label>Idea Penambahbaikan untuk Program Akan Datang</label>
+    <textarea id="idea" placeholder="Cth: tambah slot tadabbur alam, susun semula jadual qiamullail..."></textarea>
+  </div>
+
+  <div class="card">
+    <div class="submit-row">
+      <button class="submit" id="btnSubmit" onclick="hantarBorang()">Hantar Penilaian</button>
+      <span class="status" id="statusMsg"></span>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    <b>Berikhtiar &middot; Berdoa &middot; Bertawakal</b><br>
+    Jabatan Undang-Undang &amp; Perkhidmatan Syariah, Hospital Pakar PUSRAWI Kuala Lumpur
+  </p>
+</div>
+
+<div class="wrap" id="successWrap" style="display:none;">
+  <div class="card success-screen">
+    <div class="glyph">&#9789;</div>
+    <h2>Jazakumullahu Khairan!</h2>
+    <p>Penilaian anda telah berjaya dihantar. Terima kasih atas masa dan pandangan yang dikongsikan untuk penambahbaikan program akan datang.</p>
+  </div>
+</div>
+
+<script>
+// ====== GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT WEB APP ANDA ======
+const SCRIPT_URL = "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_DI_SINI";
+// =======================================================================
+
+const kriteria = {
+  fasilitator: [
+    "Naqib/fasilitator berpengetahuan luas dan mesra dalam menyampaikan modul usrah.",
+    "Modul usrah disampaikan dengan cara yang menarik dan mudah difahami.",
+    "Pertanyaan/perbincangan peserta dilayan dengan baik sepanjang program.",
+    "Pandangan keseluruhan tentang fasilitator/naqib."
+  ],
+  kandungan: [
+    "Program ini menepati jangkaan saya sebagai peserta.",
+    "Modul usrah (taaruf, puzzle kehidupan, amalan race, escape dunia, tadabbur alam) jelas dan bermakna.",
+    "Objektif program 'Pemerkasaan Rohani, Memupuk Ukhuwah Sejati' berjaya dicapai.",
+    "Aktiviti rehlah (air terjun, pulau herba, taman orkid) menyokong pengalaman keseluruhan.",
+    "Pandangan keseluruhan mengenai kandungan program."
+  ],
+  logistik: [
+    "Pengurusan masa sepanjang program (usrah, rehat, solat, aktiviti) adalah baik.",
+    "Tempoh program (3 hari 2 malam) adalah sesuai.",
+    "Penginapan houseboat dan kemudahan adalah selesa dan kondusif.",
+    "Pengangkutan dan urusan perjalanan diuruskan dengan lancar.",
+    "Saya akan mencadangkan program seperti ini kepada wargakerja lain.",
+    "Pandangan keseluruhan mengenai pengurusan &amp; logistik program."
+  ]
+};
+
+function buildScale(groupKey, index, text){
+  const name = groupKey + "_" + index;
+  let html = `<div class="criteria"><p>${text}</p><div class="scale">`;
+  const labels = {5:"Cemerlang",4:"Baik",3:"Purata",2:"Berpuas hati",1:"Tidak Memuaskan"};
+  [5,4,3,2,1].forEach(v=>{
+    const id = name + "_" + v;
+    html += `<input type="radio" name="${name}" id="${id}" value="${v}">
+      <label class="opt" for="${id}"><span class="n">${v}</span><span class="t">${labels[v]}</span></label>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+Object.keys(kriteria).forEach(groupKey=>{
+  const container = document.getElementById("group-" + groupKey);
+  let out = "";
+  kriteria[groupKey].forEach((text, i)=>{ out += buildScale(groupKey, i, text); });
+  container.innerHTML = out;
+});
+
+function getRadioValue(name){
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : "";
+}
+
+async function hantarBorang(){
+  const statusEl = document.getElementById("statusMsg");
+  const btn = document.getElementById("btnSubmit");
+  const nama = document.getElementById("nama").value.trim();
+  const jabatan = document.getElementById("jabatan").value.trim();
+  const majikan = document.getElementById("majikan").value;
+  const idStaff = document.getElementById("idStaff").value.trim();
+  const noKp = document.getElementById("noKp").value.trim();
+  const keseluruhan = getRadioValue("keseluruhan");
+
+  if(!nama || !jabatan || !majikan || !idStaff || !noKp){
+    statusEl.textContent = "Sila lengkapkan Nama, Jabatan/Unit, Pilihan Majikan, No. ID Staff dan No. Kad Pengenalan.";
+    statusEl.className = "status err";
+    return;
+  }
+  if(!keseluruhan){
+    statusEl.textContent = "Sila berikan Penilaian Keseluruhan sebelum menghantar.";
+    statusEl.className = "status err";
+    document.getElementById("overallScale").scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    nama: nama,
+    jabatan: jabatan,
+    majikan: majikan,
+    idStaff: idStaff,
+    noKp: noKp,
+    telefon: document.getElementById("telefon").value.trim(),
+  };
+  Object.keys(kriteria).forEach(groupKey=>{
+    kriteria[groupKey].forEach((text, i)=>{
+      payload[groupKey + "_" + (i+1)] = getRadioValue(groupKey + "_" + i);
+    });
+  });
+  payload.keseluruhan = keseluruhan;
+  payload.komen = document.getElementById("komen").value.trim();
+  payload.idea = document.getElementById("idea").value.trim();
+
+  if(SCRIPT_URL.indexOf("PASTE_") === 0){
+    statusEl.textContent = "URL Google Apps Script belum ditetapkan (lihat panduan penyediaan).";
+    statusEl.className = "status err";
+    return;
+  }
+
+  btn.disabled = true;
+  statusEl.textContent = "Menghantar...";
+  statusEl.className = "status";
+
+  try{
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    document.getElementById("formWrap").style.display = "none";
+    document.getElementById("successWrap").style.display = "block";
+    window.scrollTo({top:0, behavior:"smooth"});
+  }catch(err){
+    statusEl.textContent = "Gagal menghantar. Sila cuba lagi.";
+    statusEl.className = "status err";
+    btn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>
