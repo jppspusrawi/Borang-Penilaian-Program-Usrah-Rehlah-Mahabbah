@@ -112,16 +112,30 @@
 
   /* ---- Rating scale legend ---- */
   .legend{
-    display:flex; gap:6px; flex-wrap:wrap; margin:16px 0 4px;
-    background:var(--paper); border:1px dashed var(--line); border-radius:10px; padding:12px 14px;
+    display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:16px 0 4px;
+    background:linear-gradient(180deg,#fdfcf8,var(--paper));
+    border:1px solid var(--line); border-radius:12px; padding:14px;
   }
+  @media(max-width:560px){.legend{grid-template-columns:repeat(2,1fr);}}
   .legend .chip{
-    font-size:12px; color:var(--navy); display:flex; align-items:center; gap:6px;
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:7px;
+    padding:12px 6px 10px; border-radius:10px; background:#fff;
+    border:1px solid var(--line); border-top:3px solid var(--tone,var(--navy-deep));
+    box-shadow:0 3px 8px -4px rgba(11,37,69,.18);
   }
   .legend .num{
-    width:20px; height:20px; border-radius:50%; background:var(--navy-deep); color:var(--gold-light);
-    display:inline-flex; align-items:center; justify-content:center; font-weight:600; font-size:11px;
+    width:30px; height:30px; border-radius:50%; background:var(--tone,var(--navy-deep)); color:#fff;
+    display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;
+    box-shadow:0 2px 6px -1px rgba(0,0,0,.25);
   }
+  .legend .chip .t{
+    font-size:11.5px; font-weight:600; color:var(--navy); letter-spacing:.01em; line-height:1.25;
+  }
+  .legend .chip.c5{--tone:#1f7a4c;}
+  .legend .chip.c4{--tone:#4a8f5c;}
+  .legend .chip.c3{--tone:var(--gold);}
+  .legend .chip.c2{--tone:#c07a3a;}
+  .legend .chip.c1{--tone:var(--red);}
 
   /* ---- Rating item ---- */
   .criteria{border-top:1px solid var(--line); padding:14px 0;}
@@ -254,11 +268,11 @@
     <p class="section-title">Skala Penilaian</p>
     <p class="section-sub">Sila nilai setiap kriteria berikut berdasarkan skala di bawah.</p>
     <div class="legend">
-      <span class="chip"><span class="num">5</span> Cemerlang</span>
-      <span class="chip"><span class="num">4</span> Baik</span>
-      <span class="chip"><span class="num">3</span> Purata</span>
-      <span class="chip"><span class="num">2</span> Berpuas hati</span>
-      <span class="chip"><span class="num">1</span> Tidak Memuaskan</span>
+      <span class="chip c5"><span class="num">5</span><span class="t">Cemerlang</span></span>
+      <span class="chip c4"><span class="num">4</span><span class="t">Baik</span></span>
+      <span class="chip c3"><span class="num">3</span><span class="t">Purata</span></span>
+      <span class="chip c2"><span class="num">2</span><span class="t">Berpuas hati</span></span>
+      <span class="chip c1"><span class="num">1</span><span class="t">Tidak Memuaskan</span></span>
     </div>
 
     <p class="subhead">Fasilitator &amp; Naqib Usrah</p>
